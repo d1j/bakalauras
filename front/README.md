@@ -1,6 +1,6 @@
 # Prerequisites
-NPM 8.5.5
-Node.js 16.15.0
+* NPM 8.5.5
+* Node.js 16.15.0
 
 
 # Application startup for testing purposes.
