@@ -1,0 +1,20 @@
+#content {
+    margin: 10px;
+}
+
+body {
+    width: 600px;
+    overflow: visible;
+}
+
+.scr_err-msg {
+    color: rgb(214, 55, 55);
+}
+
+.scr_success-msg {
+    color: rgb(71, 161, 44)
+}
+
+#scr_login-status {
+    margin: 10px;
+}
