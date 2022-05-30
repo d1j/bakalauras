@@ -11,8 +11,7 @@ services:
     image: user_api
     build: ./user_api
     command: >
-      bash -c "python manage.py migrate
-      && python manage.py runserver 0.0.0.0:8000"
+      bash -c "sleep 5; python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     ports:
       - 8000:8000
     environment:
@@ -24,19 +23,22 @@ services:
       - PSQL_USER=postgres
       - PSQL_PASSWORD=password
       - TOOLS_TEST_SCRAPE_HOST=http://scraper:9000/scrape_html
-      - SCHEDULER_HOST=http://scheduler:8002
+      - SCHEDULER_HOST=http://scheduler:8002/
     depends_on:
       - db
   scheduler:
     image: scheduler
     build: ./scheduler
-    command: uvicorn main:app --host 0.0.0.0 --port 8002
+    command: bash -c "sleep 15; uvicorn main:app --host 0.0.0.0 --port 8002"
     ports:
       - 8002:8002
     environment:
       - POSTGRESS_CONNECTION=postgresql://postgres:password@db:5432/core
-      - SCRAPER_HOST=http://scraper:9000
-      - MAILER_HOST=http://mailer:9009
+      - SCRAPER_HOST=http://scraper:9000/
+      - MAILER_HOST=http://mailer:9009/
+    depends_on:
+      - db
+      - user_api
   scraper:
     image: scraper
     build: ./scraper
