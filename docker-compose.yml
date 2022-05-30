@@ -1,0 +1,65 @@
+version: "3"
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=core
+  user_api:
+    image: user_api
+    build: ./user_api
+    command: >
+      bash -c "python manage.py migrate
+      && python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - 8000:8000
+    environment:
+      - DJANGO_SETTINGS_SECRET_KEY=secret
+      - PSQL_ENGINE=django.db.backends.postgresql
+      - PSQL_NAME=core
+      - PSQL_HOST=db
+      - PSQL_PORT=5432
+      - PSQL_USER=postgres
+      - PSQL_PASSWORD=password
+      - TOOLS_TEST_SCRAPE_HOST=http://scraper:9000/scrape_html
+      - SCHEDULER_HOST=http://scheduler:8002
+    depends_on:
+      - db
+  scheduler:
+    image: scheduler
+    build: ./scheduler
+    command: uvicorn main:app --host 0.0.0.0 --port 8002
+    ports:
+      - 8002:8002
+    environment:
+      - POSTGRESS_CONNECTION=postgresql://postgres:password@db:5432/core
+      - SCRAPER_HOST=http://scraper:9000
+      - MAILER_HOST=http://mailer:9009
+  scraper:
+    image: scraper
+    build: ./scraper
+    command: uvicorn main:app --host 0.0.0.0 --port 9000
+    ports:
+      - 9000:9000
+  mailer:
+    image: mailer
+    build: ./mailer
+    command: uvicorn main:app --host 0.0.0.0 --port 9009
+    ports:
+      - 9009:9009
+    environment:
+      - MAIL_SENDER_ADDRESS=nustatyti_el_pasta_cia
+      - MAIL_SENDER_PASSWORD=nustatyti_slaptazodi_cia
+  test_api:
+    image: test_api
+    build: ./test_api
+    command: uvicorn main:app --host 0.0.0.0 --port 8001
+    ports:
+      - 8001:8001
+  front:
+    image: front
+    build: ./front
+    ports:
+      - 3000:3000

@@ -1,8 +1,20 @@
-Programinė įranga reikalinga projektui paleisti:
+Programinei įrangai paleisti siūloma naudoti Docker Compose:
+https://docs.docker.com/compose/install/
+Naudojant Docker Compose programinė įranga paleidžiama sekant šias instrukcijas:
+1. Atidaryti komandinę eilutę ir nueiti į programinės įrangos pagrindinį aplanką.
+2. Jeigu norima įgalinti laiškų siuntimo funkcionalumą, "./docker-compose.yml" faile "services.mailer.environment" skiltyje nurodyti el. pašto paskyros prisijungimo duomenis. Siūloma naudoti Gmail su sugeneruotu "App Passwords" slaptažodžiu. 
+3. Pagrindiniame projekto aplanke paleisti komandą: "docker-compose up -d"
+4. Įkelti naršyklės plėtinį į "Chromium" tipo naršyklę iš "./extension" aplanko. Instrukcijas galima rasti "./extension/readme.md".
+
+
+Jeigu Docker Compose nėra naudojamas, projektui paleisti reikalinga ši programinė įranga:
 ~ Python 3.9+
 ~ python3-venv
+~ psycopg2-binary https://www.psycopg.org/docs/install.html
 ~ PostgreSQL 14.2
 ~ NPM 8.5.5
 ~ Node.js 16.15.0
+Norint paleisti programą be Docker Compose, sekti instrukcijas, nurodytas ./readme.md faile.
 
-Norint paleisti programą, sekti instrukcijas, nurodytas ./readme.md faile.
+
+Paleidus programinę įrangą, duomenų valdymo ir analizės svetainė pasiekiama localhost:3000 adresu.
