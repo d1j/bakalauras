@@ -4,10 +4,6 @@
 * PostgreSQL 14.2
 
 
-# Dependencies
-Before running this component, make sure to setup `scheduler`, `scraper` and `mailer` first.
-
-
 # Required environment variables
 
 ```bash

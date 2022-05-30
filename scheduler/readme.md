@@ -4,10 +4,6 @@
 * PostgreSQL 14.2
 
 
-# Dependencies
-Before running this component, make sure to setup `scraper` and `mailer` first.
-
-
 # Required environment variables
 ```bash
 export POSTGRESS_CONNECTION='postgresql://postgres:password@localhost:5432/core'

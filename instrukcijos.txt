@@ -1,0 +1,8 @@
+Programinė įranga reikalinga projektui paleisti:
+~ Python 3.9+
+~ python3-venv
+~ PostgreSQL 14.2
+~ NPM 8.5.5
+~ Node.js 16.15.0
+
+Norint paleisti programą, sekti instrukcijas, nurodytas ./readme.md faile.

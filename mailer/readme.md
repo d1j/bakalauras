@@ -16,3 +16,7 @@ export MAIL_SENDER_PASSWORD='mail.password'
 3. Install requirements: `pip install -r requirements.txt`
 4. Setup environment variables (suggested tool - `direnv`)
 5. Run the system: `uvicorn main:app --reload --port 9009`
+
+
+# Note
+Whole system can work without this component, but users will not receive emails about data changes.
